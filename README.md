@@ -60,6 +60,75 @@ Note : File name should be with HDL Extension
 */Program to design 4 bit adder by instantiating 1 bit Full adder.also add test bench program */
 Developed by: Register Number*/
 
+ module full_adder(A,B,CIN,S,COUT);
+
+input A,B,CIN;
+
+output S,COUT;
+
+assign
+
+S=A^B^CIN;
+
+assignCOUT=(A&B) | (CIN&(A^B));
+
+endmodule
+
+module fulladd_4bit(A,B,C0,S,C4); input
+
+[3:0] A,B;
+
+input C0; output
+
+[3:0] S; output
+
+C4;
+
+wire C1,C2,C3;
+
+full_adder fa0 (A[0],B[0],C0,S[0],C1);
+
+full_adder fa1 (A[1],B[1],C1,S[1],C2);
+
+full_adder fa2 (A[2],B[2],C2,S[2],C3);
+
+full_adder fa3 (A[3],B[3],C3,S[3],C4);
+
+endmodule
+
+module test_4bit;
+
+reg [3:0] A;
+
+reg [3:0] B; reg C0; wire
+
+[3:0] S; wire C4; module
+
+test_4bit;
+
+reg [3:0] A;
+
+reg [3:0] B; reg C0; wire
+
+[3:0] S; wire C4;
+
+fulladd_4bit dut (A,B,C0,S,C4);
+
+begin
+
+A=4'b0011;B=4'b0011;C0=1'b0;
+
+#10; A=4'b1011;B=4'b0111;C0=1'b1;
+
+#10; A=4'b1111;B=4'b1111;C0=1'b1;
+
+#10;
+
+end initial
+
+#50 $finish;
+
+endmodule
 ## Functional Simulation: 
 
 	Invoke the cadence environment by type the below commands 
@@ -71,6 +140,8 @@ Developed by: Register Number*/
       (The path of cshrc could vary depending on the installation destination)
       
 	After this you can see the window like below 
+![Untitled](https://github.com/user-attachments/assets/8288bf70-e663-402f-94cb-2acac3b2b801)
+
 
 ### Fig 3:Invoke the Cadence Environment
 
@@ -83,12 +154,16 @@ or
 •	linux:/> nclaunch& // On subsequent calls to NCVERILOG 
 
 	It will invoke the nclaunch window for functional simulation we can compile,elaborate and simulate it using Multiple Step .
+![Untitled-1](https://github.com/user-attachments/assets/2068d5cc-f6d0-48bb-9415-218a9d81caae)
+
 
 ### Fig 4:Setting Multi-step simulation
 
 	Select Multiple Step and then select “Create cds.lib File” .
 
 	Click the cds.lib file and save the file by clicking on Save option 
+![Untitled](https://github.com/user-attachments/assets/4405a58e-64ac-4006-9e46-105baded7c79)
+
 
 ### Fig 5:cds.lib file Creation
 
@@ -112,6 +187,8 @@ or
 
 	To perform the function simulation, the following three steps are involved Compilation, Elaboration and Simulation. 
 
+![Untitled-1](https://github.com/user-attachments/assets/47b763d3-1383-423b-a20b-d2450264055e)
+
 ### Fig 7: Nclaunch Window
 
 ## Step 1: Compilation:– Process to check the correct Verilog language syntax and usage 
@@ -130,6 +207,8 @@ i.e Cadence IES command for compile: ncverilog +access+rwc -compile fa.v
 Left side select the file and in Tools : launch verilog compiler with current selection will get enable. Click it to compile the code 
 
 Worklib is the directory where all the compiled codes are stored while Snapshot will have output of elaboration which in turn goes for simulation
+![Untitled-1](https://github.com/user-attachments/assets/4b30a739-926e-4c0b-84ad-2e542bb37a29)
+
 
 ### Fig 8: Compiled database in worklib
 
@@ -153,6 +232,8 @@ i.e Cadence IES command for compile: ncverilog +access+rwc -compile fa.v
 5.	It also establishes net connectivity and prepares all of this for simulation
    
 	After elaboration the file will come under snapshot. Select the test bench and elaborate it.
+![Untitled](https://github.com/user-attachments/assets/7e26e95d-2df8-478e-8a40-c82ff57a8811)
+
 
 ### Fig 9: Elaboration Launch Option
 
@@ -165,12 +246,19 @@ i.e Cadence IES command for compile: ncverilog +access+rwc -compile fa.v
 	Simulation allow to dump design and test bench signals into a waveform 
 
 	Steps for simulation – Run the simulation command with simulator options
+![Untitled-1](https://github.com/user-attachments/assets/486805c3-38d7-4f87-8370-dbad57ccbe56)
+
 
 ### Fig 10: Design Browser window for simulation
+![Untitled](https://github.com/user-attachments/assets/91b3298c-3515-4d60-a1d6-fb82e2239db1)
+
 
 ### Fig 11: Launching Simulation Waveform WindowSimulation Waveform Window
+![Untitled-1](https://github.com/user-attachments/assets/51ff9eb6-d748-431b-988c-445d8bd3182f)
+
 
 ### Fig 12: Simulation Waveform Window
+
 
 ### Result:
 
